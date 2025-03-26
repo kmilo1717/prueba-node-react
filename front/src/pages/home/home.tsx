@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Plus, Trash } from "lucide-react"
+import { Info, Plus, Trash } from "lucide-react"
 import { app } from "@/atoms/kuepa"
 
 import { Button } from "@/components/ui/button"
@@ -77,7 +77,10 @@ export default function Leads() {
               className="max-w-md"
             />
           </div>
-
+          <div className="flex items-center text-muted-foreground my-4">
+            <Info className="mr-2 h-5 w-5 text-center" />
+            <p className="text-sm text-muted-foreground">Para editar un lead, haga click en el registro</p>
+          </div>
           <div className="rounded-md border">
             <Table>
               <TableHeader>
