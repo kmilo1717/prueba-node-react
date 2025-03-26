@@ -55,7 +55,8 @@ export default function Leads() {
     (lead) =>
       lead.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       lead.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.mobile_phone.includes(searchTerm),
+      lead.mobile_phone.includes(searchTerm) ||
+      lead.interestProgram.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
