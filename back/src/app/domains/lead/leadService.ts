@@ -46,7 +46,7 @@ class LeadService {
         const exists = await Lead.findOne({_id: _params._id}).lean()
         if(!exists) return responseUtility.error('lead.not_found');
         
-        const lead = await Lead.findOneAndUpdate({_id: _params._id}, {$set: _params}, {new:true, lean:true})
+        const lead = await Lead.findOneAndUpdate({_id: _params._id}, {$set: _params}, {new:false, lean:true})
         
         
         return responseUtility.success({
@@ -263,16 +263,11 @@ class LeadService {
       
       let leads = await Lead.find(where)
       .sort({created_at:-1})
-      .populate({
-        path: 'contact',
-        select: 'first_name last_name document number',
-        options: { lean:true }
-      })
       .limit(100)
       .lean()
       
       leads = leads.map(_l=>{
-        _l.full_name = `${_l.contact?.first_name} ${_l.contact?.last_name}`.trim()
+        _l.full_name = `${_l.first_name} ${_l.last_name}`.trim()
         return _l
       })
       
@@ -286,7 +281,9 @@ class LeadService {
   
   public async test (_params) {
     try{
-      
+      return responseUtility.success({
+        message: 'Lead module working'
+      })
     } catch (error) {
       console.log('error', error)
     }
@@ -297,11 +294,6 @@ class LeadService {
   public async get (_params:{_id:string}) {
     try{
       const lead = await Lead.findOne({_id: _params._id})
-      .populate({
-        path: 'contact',
-        select: 'first_name last_name incremental document number',
-        options: { lean:true }
-      })
       .lean()
       
       if(!lead) return responseUtility.error('lead.not_found');

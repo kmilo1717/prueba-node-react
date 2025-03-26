@@ -9,8 +9,8 @@ export const run = async(_params, console:IConsole) => {
     
     const users = [
       {
-        username: 'useradminket',
-        password: 'ket#2025', 
+        username: 'admin',
+        password: '123123', 
         number: '000000',
         profile:{
           first_name: 'Kuepa', 

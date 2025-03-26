@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     </Suspense>
   },
   {
-    path: '/leads',
+    path: '/leads/:id?',
     element: 
       <AppLayout module="crm" window="contact">
         <Suspense fallback={<Loading mode="logo" />}>
